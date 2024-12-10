@@ -1,4 +1,6 @@
 package people;
 
-public class Nemur extends Person{
+import interfaces.Scientist;
+
+public class Nemur extends Person implements Scientist {
 }

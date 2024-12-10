@@ -4,5 +4,5 @@ public enum Mood {
     GOOD,
     DISSATISFIED,
     SAD,
-    FRIENDLY,
+    FRIENDLY;
 }

@@ -1,4 +1,6 @@
 package people;
 
-public class Charly extends Person {
+import interfaces.Scientist;
+
+public class Charly extends Person implements Scientist {
 }

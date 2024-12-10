@@ -31,6 +31,10 @@ public abstract class Person {
         return mood;
     }
 
+    public void handshake(Object a, Object b) {
+        System.out.println(a + "пожал руку" + b);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,11 +53,7 @@ public abstract class Person {
         return this.getClass() +
                 "[name='" + name + '\'' +
                 ", place=" + place +
-                ", lifeStatus=" + lifeStatus +
-                ", sleepStatus=" + sleepStatus +
-                ", faith=" + faith +
                 ", mood=" + mood +
-
                 ']';
     }
 }
