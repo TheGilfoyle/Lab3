@@ -1,8 +1,14 @@
 package enums;
 
+import people.Person;
+
 public enum Mood {
-    GOOD,
+    HAPPY,
     DISSATISFIED,
     SAD,
     FRIENDLY;
+
+    public Mood getMood(Person person) {
+        return person.getMood();
+    }
 }

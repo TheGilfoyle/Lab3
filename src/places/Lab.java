@@ -1,8 +1,7 @@
 package places;
 
-import people.Person;
-
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Lab extends Place {
     public Lab() {
@@ -12,12 +11,12 @@ public class Lab extends Place {
         super.setName(name);
     }
 
-    ArrayList<Person> people = new ArrayList<Person>();
+    ArrayList<Objects> creatures = new ArrayList<Objects>();
 
-    public void beinLab(Person... person) {
-        for (Person p : person) {
-            people.add(p);
-            System.out.println(p.getName() + "is in a" + this.getName());
+    public void beinLab(Objects... objects) {
+        for (Objects p : objects) {
+            creatures.add(p);
+            System.out.println("is in a" + this.getName());
         }
     }
 }

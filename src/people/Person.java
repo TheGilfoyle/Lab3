@@ -1,14 +1,16 @@
 package people;
 
 import enums.Mood;
+import interfaces.TalkAble;
 import places.Place;
 
 import java.util.Objects;
 
-public abstract class Person {
+public abstract class Person implements TalkAble {
     private String name;
     private Place place;
-    private Mood mood = Mood.GOOD;
+    private Mood mood = Mood.HAPPY;
+    boolean forgivingAbility = false;
 
     public void setName(String name){
         this.name = name;
@@ -31,8 +33,24 @@ public abstract class Person {
         return mood;
     }
 
-    public void handshake(Object a, Object b) {
-        System.out.println(a + "пожал руку" + b);
+    public void setForgivingAbility(boolean forgivingAbility) {
+        this.forgivingAbility = forgivingAbility;
+    }
+
+    public boolean getForgivingAbility() {
+        return forgivingAbility;
+    }
+
+    public void walk() {
+        System.out.println(this + "walks");
+    }
+
+    public void handshake(Person a, Person b) {
+        System.out.println(a.getName() + "пожал руку" + b.getName());
+    }
+
+    @Override
+    public void talk() {
     }
 
     @Override
