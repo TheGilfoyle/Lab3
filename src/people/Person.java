@@ -1,5 +1,6 @@
 package people;
 
+import enums.Mood;
 import places.Place;
 
 import java.util.Objects;
@@ -7,10 +8,7 @@ import java.util.Objects;
 public abstract class Person {
     private String name;
     private Place place;
-    private LifeStatus lifeStatus = LifeStatus.Alive;
-    private SleepStatus sleepStatus = SleepStatus.WokenUp;
-    private Faiths faith = Faiths.None;
-    private Mood mood = Mood.Good;
+    private Mood mood = Mood.GOOD;
 
     public void setName(String name){
         this.name = name;
@@ -19,29 +17,12 @@ public abstract class Person {
         return name;
     }
 
+    public void pretend(Mood mood){
+        System.out.println("Сделать вид, что я " + mood);
+    }
+
     public void setPlace(Place place) {this.place = place;}
     public Place getPlace() {return place;}
-
-    public void setLifeStatus(LifeStatus lifeStatus) {
-        this.lifeStatus = lifeStatus;
-    }
-    public LifeStatus getLifeStatus(){
-        return this.lifeStatus;
-    }
-
-    public void setFaith(Faiths faith) {
-        this.faith = faith;
-    }
-    public Faiths getFaith() {
-        return faith;
-    }
-
-    public void setSleepStatus(SleepStatus sleepStatus) {
-        this.sleepStatus = sleepStatus;
-    }
-    public SleepStatus getSleepStatus() {
-        return sleepStatus;
-    }
 
     public void setMood(Mood mood) {
         this.mood = mood;
@@ -55,12 +36,12 @@ public abstract class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return Objects.equals(name, person.name) && Objects.equals(place, person.place) && lifeStatus == person.lifeStatus && sleepStatus == person.sleepStatus && faith == person.faith && Objects.equals(mood, person.mood);
+        return Objects.equals(name, person.name) && Objects.equals(place, person.place) && Objects.equals(mood, person.mood);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, place, lifeStatus, sleepStatus, faith, mood);
+        return Objects.hash(name, place, mood);
     }
 
     @Override
