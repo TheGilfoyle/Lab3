@@ -1,0 +1,174 @@
+@startuml
+top to bottom direction
+skinparam linetype ortho
+
+package animals {
+    class Animal {
+        + Animal():
+        ~ makeSound(): void
+        ~ eat(): void
+    }
+    class Mouse {
+        + Mouse():
+        ~ makeSound(): void
+        ~ eat(): void
+    }
+}
+
+package enums {
+    enum Month << enumeration >> {
+        + Month():
+        + values(): Month[]
+        + valueOf(String): Month
+    }
+    enum Mood << enumeration >> {
+        + Mood():
+        + values(): Mood[]
+        + valueOf(String): Mood
+        + getMood(Person): Mood
+    }
+    enum ResultsOfBoardOfDirectors << enumeration >> {
+        + ResultsOfBoardOfDirectors():
+        + valueOf(String): ResultsOfBoardOfDirectors
+        + values(): ResultsOfBoardOfDirectors[]
+    }
+}
+
+package etc {
+    class BoardOfDirectors {
+        + BoardOfDirectors():
+        ~ result: ResultsOfBoardOfDirectors
+        result: ResultsOfBoardOfDirectors
+    }
+    class FondOfWelberg {
+        + FondOfWelberg():
+    }
+    class ScientificWork {
+        + ScientificWork():
+        + enoughTime(): boolean
+    }
+}
+
+package exceptions {
+    class FallException {
+        + FallException(String):
+    }
+    class PersonIsAlreadyInPlace {
+        + PersonIsAlreadyInPlace(String):
+    }
+}
+
+package interfaces {
+    interface NoticeAble << interface >> {
+        + notice(): void
+    }
+    interface Report << interface >> {
+        + report(): void
+    }
+    interface Scientist << interface >> {
+        + solveSquareEquation(): void
+        + report(): void
+    }
+    interface TalkAble << interface >> {
+        + talk(): void
+    }
+    interface WantToTake << interface >> {
+        + take(Object): void
+    }
+}
+
+package people {
+    class Bart {
+        + Bart():
+        + take(Object): void
+    }
+    class Charly {
+        + Charly():
+        + report(): void
+        + notice(): void
+    }
+    class Nemur {
+        + Nemur():
+    }
+    class Person {
+        + Person():
+        - mood: Mood
+        ~ forgivingAbility: boolean
+        - name: String
+        - place: Place
+        + hashCode(): int
+        + equals(Object): boolean
+        + handshake(Person, Person): void
+        + talk(): void
+        + toString(): String
+        + walk(): void
+        + pretend(Mood): void
+        mood: Mood
+        name: String
+        place: Place
+        forgivingAbility: boolean
+    }
+    class RandomPerson {
+        + RandomPerson():
+    }
+    class Strauss {
+        + Strauss():
+    }
+}
+
+package places {
+    class Cabinet {
+        + Cabinet():
+        + Cabinet(String):
+        + beinCabinet(Person[]): void
+    }
+    class Cage {
+        + Cage():
+        + beinCage(Animal[]): void
+    }
+    class Lab {
+        + Lab(String):
+        + Lab():
+        + beinLab(Objects[]): void
+    }
+    class Place {
+        + Place():
+        - name: String
+        + equals(Object): boolean
+        + hashCode(): int
+        + toString(): String
+        name: String
+    }
+}
+
+package records {
+    entity Date << record >> {
+        + Date(int, Month):
+        + day(): int
+        + month(): Month
+    }
+    entity Labyrinth << record >> {
+        + Labyrinth(String, int):
+        + level(): int
+        + name(): String
+        ~ timePath(): double
+    }
+}
+
+Bart                       -[#000082,plain]-^  people.Person
+Bart                       -[#008200,dashed]-^  interfaces.Scientist
+Bart                       -[#008200,dashed]-^  interfaces.WantToTake
+Cabinet                    -[#000082,plain]-^  places.Place
+Cage                       -[#000082,plain]-^  places.Place
+Charly                     -[#008200,dashed]-^  interfaces.NoticeAble
+Charly                     -[#000082,plain]-^  people.Person
+Charly                     -[#008200,dashed]-^  interfaces.Scientist
+Lab                        -[#000082,plain]-^  places.Place
+Mouse                      -[#000082,plain]-^  animals.Animal
+Nemur                      -[#000082,plain]-^  people.Person
+Nemur                      -[#008200,dashed]-^  interfaces.Scientist
+Person                     -[#008200,dashed]-^  interfaces.TalkAble
+RandomPerson               -[#000082,plain]-^  people.Person
+Strauss                    -[#000082,plain]-^  people.Person
+Strauss                    -[#008200,dashed]-^  interfaces.Scientist
+@enduml
