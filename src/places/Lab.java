@@ -11,7 +11,7 @@ public class Lab extends Place {
         super.setName(name);
     }
 
-    ArrayList<Objects> creatures = new ArrayList<Objects>();
+    ArrayList<Objects> creatures = new ArrayList<>();
 
     public void beinLab(Objects... objects) {
         for (Objects p : objects) {

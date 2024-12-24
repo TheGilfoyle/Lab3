@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class Cage extends Place {
 
-    ArrayList<Animal> animals = new ArrayList<Animal>();
+    ArrayList<Animal> animals = new ArrayList<>();
 
     public void beinCage(Animal... animal) {
         for (Animal a : animal) {
