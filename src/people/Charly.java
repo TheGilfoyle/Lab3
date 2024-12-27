@@ -2,6 +2,7 @@ package people;
 
 import enums.ResultsOfBoardOfDirectors;
 import etc.ScientificWork;
+import exceptions.FallException;
 import interfaces.NoticeAble;
 import interfaces.Report;
 import interfaces.Scientist;
@@ -14,6 +15,18 @@ public class Charly extends Person implements Scientist, NoticeAble, Report {
 
     public Charly(String name) {
         super(name);
+    }
+
+    @Override
+    public void walk() {
+        try {
+            double random = Math.random();
+            if (random > 0.76) {
+                throw new FallException(random);
+            }
+        } catch (FallException fallException) {
+            System.out.println(fallException.getMessage());
+        }
     }
 
     @Override

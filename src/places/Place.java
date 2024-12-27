@@ -15,6 +15,8 @@ public abstract class Place {
         return name;
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

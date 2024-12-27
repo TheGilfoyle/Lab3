@@ -9,7 +9,7 @@ public class Cabinet extends Place {
         super.setName(name);
     }
 
-    ArrayList<Person> people = new ArrayList<Person>();
+    ArrayList<Person> people = new ArrayList<>();
 
     public void beInCabinet(Person... person) {
         for (Person p : person) {
