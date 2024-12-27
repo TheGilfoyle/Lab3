@@ -3,16 +3,19 @@ package places;
 import animals.Animal;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Cage extends Place {
 
     ArrayList<Animal> animals = new ArrayList<>();
 
-    public void beinCage(Animal... animal) {
+    public Cage(String name) {
+        super(name);
+    }
+
+    public void beInCage(Animal... animal) {
         for (Animal a : animal) {
             animals.add(a);
-            System.out.println("is in a" + this.getName());
+            System.out.println(a.getName()+ " is in a " + this.getName());
         }
     }
 }

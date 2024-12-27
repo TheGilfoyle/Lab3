@@ -1,5 +1,8 @@
 package interfaces;
 
+import animals.Animal;
+
 public interface WantToTake {
-    void take(Object obj);
+    int wishToTake = 0;
+    void  take(Animal animal);
 }

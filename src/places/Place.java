@@ -4,7 +4,10 @@ import java.util.Objects;
 
 public abstract class Place {
     private String name;
-
+    public Place(String name) {
+        this.name = name;
+    }
+    public Place() {}
     public void setName(String name) {
         this.name = name;
     }

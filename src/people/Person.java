@@ -1,22 +1,30 @@
 package people;
 
+
+import animals.Animal;
 import enums.Mood;
 import interfaces.TalkAble;
+import interfaces.WaitingPerson;
 import places.Place;
 
 import java.util.Objects;
 
-public abstract class Person implements TalkAble {
+public abstract class Person implements TalkAble, WaitingPerson {
     private String name;
     private Place place;
+    private int health = 100;
     private Mood mood = Mood.HAPPY;
-    boolean forgivingAbility = false;
-    int scienceLevel = 0;
-    int scienceExperience = 0;
+    private boolean forgivingAbility = false;
+    private int scienceLevel = 0;
+    private int scienceExperience = 0;
+    private int scienceSuccess = 0;
+    private double waitingTime = 0;
 
     public Person() {
     }
-
+    public Person(String name) {
+        this.name = name;
+    }
     public Person(String name, Place place, Mood mood, boolean forgivingAbility, int scienceLevel) {
         this.name = name;
         this.place = place;
@@ -46,6 +54,18 @@ public abstract class Person implements TalkAble {
         this.forgivingAbility = forgivingAbility;
     }
 
+    public void setHealth() {
+        this.health = this.health - 1;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -62,8 +82,16 @@ public abstract class Person implements TalkAble {
         this.scienceLevel = scienceLevel + 1;
     }
 
+    public void setScienceExperience(int scienceExperience) {
+        this.scienceExperience = scienceExperience;
+    }
+
+    public int getScienceExperience() {
+        return scienceExperience;
+    }
+
     public void pretend(Mood mood) {
-//        System.out.println("Сделать вид, что я " + mood);
+        setMood(mood);
     }
 
     public void setPlace(Place place) {
@@ -91,11 +119,22 @@ public abstract class Person implements TalkAble {
     }
 
     public void walk() {
-        System.out.println(this + "walks");
+        setHealth();
     }
 
     public void handshake(Person a, Person b) {
-        System.out.println(a.getName() + "пожал руку" + b.getName());
+        a.setHealth();
+        b.setHealth();
+    }
+
+    @Override
+    public void setWaitingTime(double waitingTime) {
+        this.waitingTime = waitingTime;
+    }
+
+    @Override
+    public double getWaitingTime() {
+        return waitingTime;
     }
 
     @Override
@@ -122,5 +161,17 @@ public abstract class Person implements TalkAble {
                 ", place=" + place +
                 ", mood=" + mood +
                 ']';
+    }
+
+    public int getScienceSuccess() {
+        return scienceSuccess;
+    }
+
+    public void setScienceSuccess(int scienceSuccess) {
+        this.scienceSuccess = scienceSuccess;
+    }
+
+    public void letItGo(Animal animal, Place place) {
+        animal.changePlace(place);
     }
 }

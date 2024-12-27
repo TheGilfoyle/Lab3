@@ -4,7 +4,7 @@ import interfaces.Scientist;
 import people.Person;
 
 public class FondOfWelberg {
-    public void getAnAppealFrom(Person person) {
+    public static void getAnAppealFrom(Person person) {
         person.setScienceLevel();
     }
 }

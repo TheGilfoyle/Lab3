@@ -1,5 +1,6 @@
 package interfaces;
 
 public interface WaitingPerson {
-    int waitingTime = 0;
+    double getWaitingTime();
+    void setWaitingTime(double waitingTime);
 }

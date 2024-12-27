@@ -1,6 +1,15 @@
 package animals;
 
+import places.Place;
+
 public class Mouse extends Animal {
+    private String name;
+    public Mouse(String name) {
+        super(name);
+    }
+    public Mouse() {
+        super();
+    }
     @Override
     void makeSound() {
         System.out.println("Пи-пи-пи!");
@@ -9,5 +18,11 @@ public class Mouse extends Animal {
     @Override
     void eat() {
         System.out.println("Мышь ест");
+    }
+
+    @Override
+    public void changePlace(Place place) {
+        super.changePlace(place);
+        makeSound();
     }
 }

@@ -1,8 +1,10 @@
 package etc;
 
+import people.Person;
+
 public class ScientificWork {
     private double time = 10;
-
+    private boolean success = false;
     public boolean enoughTime() {
         if (time > 5) {
             return true;
@@ -19,6 +21,14 @@ public class ScientificWork {
         return time;
     }
 
-    public void isItGoing() {
+    public void isItMine(Person person) {
+        person.setScienceLevel();
+    }
+
+    public void setSuccess(boolean enoughTime) {
+        this.success = success;
+    }
+    public boolean getSuccess() {
+        return success;
     }
 }
