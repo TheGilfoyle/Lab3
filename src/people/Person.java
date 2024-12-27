@@ -3,6 +3,7 @@ package people;
 
 import animals.Animal;
 import enums.Mood;
+import exceptions.FallException;
 import interfaces.TalkAble;
 import interfaces.WaitingPerson;
 import places.Place;
@@ -120,6 +121,16 @@ public abstract class Person implements TalkAble, WaitingPerson {
 
     public void walk() {
         setHealth();
+        if (equals(this)) {
+            try {
+                double random = Math.random();
+                if (random > 0.76) {
+                    throw new FallException(random);
+                }
+            } catch (FallException fallException) {
+                System.out.println(fallException.getMessage());
+            }
+        }
     }
 
     public void handshake(Person a, Person b) {
@@ -146,7 +157,7 @@ public abstract class Person implements TalkAble, WaitingPerson {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return Objects.equals(name, person.name) && Objects.equals(place, person.place) && Objects.equals(mood, person.mood);
+        return Objects.equals(name, "Чарли");
     }
 
     @Override

@@ -16,7 +16,7 @@ public class Charly extends Person implements Scientist, NoticeAble, Report {
     public Charly(String name) {
         super(name);
     }
-
+/*
     @Override
     public void walk() {
         try {
@@ -28,7 +28,7 @@ public class Charly extends Person implements Scientist, NoticeAble, Report {
             System.out.println(fallException.getMessage());
         }
     }
-
+*/
     @Override
     public void notice() {
         setAttention();
