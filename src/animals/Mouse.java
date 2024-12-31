@@ -4,8 +4,8 @@ import places.Place;
 
 public class Mouse extends Animal {
     private String name;
-    public Mouse(String name) {
-        super(name);
+    public Mouse(String name, Place place) {
+        super(name, place);
     }
     public Mouse() {
         super();

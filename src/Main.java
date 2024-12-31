@@ -1,11 +1,12 @@
 import static enums.Month.*;
-import static enums.Mood.DISSATISFIED;
-import static enums.Mood.FRIENDLY;
 
 import animals.Animal;
+
+import static enums.Mood.*;
 import static etc.FondOfWelberg.*;
 import animals.Mouse;
 import enums.ResultsOfBoardOfDirectors;
+import etc.FondOfWelberg;
 import etc.ScientificWork;
 import people.*;
 import places.Cabinet;
@@ -13,30 +14,34 @@ import places.Cage;
 import places.Lab;
 import places.Labyrinth;
 import records.Date;
-import etc.BoardOfDirectors;
 
 public class Main {
     public static void main(String[] args) {
         Date date = new Date(12, JULY);
         date.print();
         Cage cage = new Cage("клетка");
-        Animal mouse = new Mouse("Элджернон");
-        cage.beInCage(mouse);
-        Nemur nemur = new Nemur("Немур");
-        Person strauss = new Strauss("Штраус");
-        Bart bart = new Bart("Барт");
-        RandomPerson randomPerson1 = new RandomPerson();
-        RandomPerson randomPerson2 = new RandomPerson();
+        Animal mouse = new Mouse("Элджернон", cage);
+        mouse.getPlace();
         Cabinet cabinet = new Cabinet("кабинет");
-        cabinet.beInCabinet(nemur, strauss, bart, randomPerson1, randomPerson2);
+        Person nemur = new Person("Немур", cabinet);
+        Person strauss = new Person("Штраус", cabinet);
+        Person bart = new Person("Барт", cabinet);
+        Person randomPerson1 = new Person(cabinet);
+        Person randomPerson2 = new Person(cabinet);
+        nemur.getPlace();
+        strauss.getPlace();
+        bart.getPlace();
+        randomPerson1.getPlace();
+        randomPerson2.getPlace();
         nemur.setWaitingTime(5);
         strauss.setWaitingTime(5);
         bart.setWaitingTime(5);
         randomPerson1.setWaitingTime(5);
         randomPerson2.setWaitingTime(5);
-        Charly charly = new Charly("Чарли");
+        Person charly = new Person("Чарли", cabinet);
+        charly.getPlace();
         charly.walk();
-        cabinet.beInCabinet(charly);
+        charly.notice();
         nemur.pretend(FRIENDLY);
         strauss.pretend(FRIENDLY);
         bart.pretend(FRIENDLY);
@@ -53,18 +58,19 @@ public class Main {
         charly.walk();
         charly.handshake(charly,randomPerson2);
         charly.walk();
-        getAnAppealFrom(charly);
+        FondOfWelberg fondOfWelberg = new FondOfWelberg();
+        fondOfWelberg.getAnAppealFrom(charly);
         ScientificWork scientificWork = new ScientificWork();
         scientificWork.isItMine(charly);
-        charly.reportFrom(scientificWork);
         nemur.reportTo(scientificWork);
         scientificWork.setTime(3);
         scientificWork.enoughTime();
         scientificWork.setTime(15);
-        BoardOfDirectors boardOfDirectors = new BoardOfDirectors();
+        FondOfWelberg.BoardOfDirectors boardOfDirectors = new FondOfWelberg.BoardOfDirectors();
         boardOfDirectors.setResult(ResultsOfBoardOfDirectors.APPROVED);
         boardOfDirectors.getResult();
         nemur.handshake(nemur,charly);
+        nemur.setMood(SAD);
         nemur.getMood();
         nemur.pretend(FRIENDLY);
         charly.setScienceExperience(0);
@@ -75,8 +81,13 @@ public class Main {
         nemur.walk();
         bart.walk();
         Lab lab = new Lab();
-        lab.beInLab(nemur, charly, bart);
+        cabinet.deletePeople(charly, bart, nemur);
+        cabinet.getPeople();
+        charly.setPlace(lab);
+        nemur.setPlace(lab);
+        bart.setPlace(lab);
         Labyrinth labyrinth = new Labyrinth("Лабиринт №1", 100);
+        mouse.setPlace(labyrinth);
         bart.letItGo(mouse, labyrinth);
     }
 }

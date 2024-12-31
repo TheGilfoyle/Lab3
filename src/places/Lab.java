@@ -13,12 +13,19 @@ public class Lab extends Place {
         super.setName(name);
     }
 
-    ArrayList<Person> people = new ArrayList<Person>();
+    ArrayList<Person> people = new ArrayList<>();
 
-    public void beInLab(Person... person) {
+    public void setPeople(Person... person) {
         for (Person p : person) {
             people.add(p);
             System.out.println(p.getName() + " is in a " + this.getName());
+        }
+    }
+
+    public void deletePeople(Person... person) {
+        for (Person p : person) {
+            people.remove(p);
+            System.out.println(p.getName() + " is not in a " + this.getName());
         }
     }
 }

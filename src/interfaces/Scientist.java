@@ -8,7 +8,6 @@ import static enums.Mood.*;
 public interface Scientist {
     default void solveSquareEquation() {}
     default void report() {}
-    default void reactionToDecisionOfBoardOfDirectors(ResultsOfBoardOfDirectors resultsOfBoardOfDirectors) {}
     default boolean timeSpendForScientistWork(ScientificWork scientificWork) {
         return switch ((int) scientificWork.getTime()) {
             case 0, 1, 2, 3, 4, 5 -> true;

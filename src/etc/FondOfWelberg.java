@@ -1,10 +1,23 @@
 package etc;
 
-import interfaces.Scientist;
+import enums.ResultsOfBoardOfDirectors;
 import people.Person;
 
 public class FondOfWelberg {
-    public static void getAnAppealFrom(Person person) {
+    public void getAnAppealFrom(Person person) {
         person.setScienceLevel();
     }
+
+    public static class  BoardOfDirectors {
+        private ResultsOfBoardOfDirectors result;
+
+        public void setResult(ResultsOfBoardOfDirectors result) {
+            this.result = result;
+        }
+
+        public ResultsOfBoardOfDirectors getResult() {
+            return result;
+        }
+    }
 }
+

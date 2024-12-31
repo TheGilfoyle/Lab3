@@ -7,8 +7,4 @@ public enum Mood {
     DISSATISFIED,
     SAD,
     FRIENDLY;
-
-    public Mood getMood(Person person) {
-        return person.getMood();
-    }
 }
