@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class Labyrinth extends Place {
     private int level;
     private String name;
-    public Labyrinth(String name, int level) {
-        this.name = name;
+    public Labyrinth(int level) {
+        super("Лабиринт");
         this.level = level;
     }
     double timePath(){
@@ -25,15 +25,20 @@ public class Labyrinth extends Place {
 
     public void setAnimals(Animal... animal) {
         for (Animal a : animal) {
-            animals.add(a);
-            System.out.println("is in a" + this.getName());
+            a.setPlace(this);
+        }
+    }
+
+    public void getAnimals() {
+        for (Animal a : animals) {
+            System.out.println(a.getName() + " is in a " + this.getName());
         }
     }
 
     public void deleteAnimals(Animal... animal) {
         for (Animal a : animal) {
             animals.remove(a);
-            System.out.println("is in a" + this.getName());
+            System.out.println("is not in a" + this.getName());
         }
     }
 }

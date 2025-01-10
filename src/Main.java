@@ -83,10 +83,8 @@ public class Main {
         Lab lab = new Lab();
         cabinet.deletePeople(charly, bart, nemur);
         cabinet.getPeople();
-        charly.setPlace(lab);
-        nemur.setPlace(lab);
-        bart.setPlace(lab);
-        Labyrinth labyrinth = new Labyrinth("Лабиринт №1", 100);
+        cabinet.setPeople(charly, nemur, bart);
+        Labyrinth labyrinth = new Labyrinth( 100);
         mouse.setPlace(labyrinth);
         bart.letItGo(mouse, labyrinth);
     }

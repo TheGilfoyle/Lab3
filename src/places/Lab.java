@@ -17,7 +17,12 @@ public class Lab extends Place {
 
     public void setPeople(Person... person) {
         for (Person p : person) {
-            people.add(p);
+            p.setPlace(this);
+        }
+    }
+
+    public void getPeople() {
+        for (Person p : people) {
             System.out.println(p.getName() + " is in a " + this.getName());
         }
     }

@@ -13,13 +13,14 @@ public class Cabinet extends Place {
 
     public void setPeople(Person... person) {
         for (Person p : person) {
-            people.add(p);
-            System.out.println(p.getName() + " is in a " + this.getName());
+            p.setPlace(this);
         }
     }
 
-    public ArrayList<Person> getPeople() {
-        return people;
+    public void getPeople() {
+        for (Person p : people) {
+            System.out.println(p.getName() + " is in a " + this.getName());
+        }
     }
 
     public void deletePeople(Person... person) {

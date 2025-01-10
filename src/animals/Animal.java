@@ -7,6 +7,7 @@ public abstract class Animal {
     private Place place;
     int scared = 0;
     int health = 150;
+    int appetite = 0;
     abstract void makeSound();
     abstract void eat();
     public Animal(String name, Place place) {

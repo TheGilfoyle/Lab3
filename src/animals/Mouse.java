@@ -17,7 +17,13 @@ public class Mouse extends Animal {
 
     @Override
     void eat() {
-        System.out.println("Мышь ест");
+        if (Math.random() > 0.65) {
+            this.setHealth(150);
+            makeSound();
+        }
+        else {
+            appetite = appetite + 1;
+        }
     }
 
     @Override

@@ -35,39 +35,6 @@ public class Person implements WaitingPerson, Report {
         this.place = place;
     }
 
-    public Person(String name, Place place, Mood mood, boolean forgivingAbility, int scienceLevel) {
-        this.name = name;
-        this.place = place;
-        this.mood = mood;
-        this.forgivingAbility = forgivingAbility;
-        this.scienceLevel = scienceLevel;
-    }
-
-    public Person(String name, Place place, boolean forgivingAbility, int scienceLevel) {
-        this.name = name;
-        this.place = place;
-        this.forgivingAbility = forgivingAbility;
-        this.scienceLevel = scienceLevel;
-    }
-
-    public Person(String name, Place place, Mood mood, int scienceLevel) {
-        this.name = name;
-        this.place = place;
-        this.mood = mood;
-        this.scienceLevel = scienceLevel;
-    }
-
-    public Person(String name, Place place, Mood mood, boolean forgivingAbility) {
-        this.name = name;
-        this.place = place;
-        this.mood = mood;
-        this.forgivingAbility = forgivingAbility;
-    }
-
-    public void setHealth() {
-        this.health = this.health - 1;
-    }
-
     public void setHealth(int health) {
         this.health = health;
     }
@@ -148,7 +115,6 @@ public class Person implements WaitingPerson, Report {
         this.waitingTime = waitingTime;
     }
 
-    @Override
     public double getWaitingTime() {
         return waitingTime;
     }
@@ -159,7 +125,7 @@ public class Person implements WaitingPerson, Report {
     }
 
     public void walk() {
-        setHealth();
+        setHealth(getHealth() - 1);
         if (equals(this)) {
             try {
                 double random = Math.random();
@@ -187,8 +153,8 @@ public class Person implements WaitingPerson, Report {
     }
 
     public void handshake(Person a, Person b) {
-        a.setHealth();
-        b.setHealth();
+        a.setHealth(getHealth() - 1);
+        b.setHealth(getHealth() - 1);
     }
 
     public void take(Animal mouse) {
