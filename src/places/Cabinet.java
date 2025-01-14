@@ -1,13 +1,38 @@
 package places;
 
+import animals.Mouse;
 import people.Person;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
+import java.util.logging.*;
 
 public class Cabinet extends Place {
 
-    private static final Logger logger = Logger.getLogger(Cabinet.class.getName());
+    private final static Logger logger = Logger.getLogger(Cabinet.class.getName());
+
+    static {
+        // Удаляем все обработчики по умолчанию
+        Logger rootLogger = Logger.getLogger("");
+        for (Handler handler : rootLogger.getHandlers()) {
+            rootLogger.removeHandler(handler);
+        }
+
+        // Создаем новый обработчик консоли
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setLevel(Level.ALL);
+
+        // Устанавливаем собственный формат
+        consoleHandler.setFormatter(new Formatter() {
+            @Override
+            public String format(LogRecord record) {
+                return record.getMessage() + System.lineSeparator();
+            }
+        });
+
+        // Добавляем обработчик к логгеру
+        logger.addHandler(consoleHandler);
+        logger.setUseParentHandlers(false);
+    }
 
     public Cabinet() {
         super("кабинет");

@@ -7,10 +7,10 @@ import etc.ScientificWork;
 import exceptions.FallException;
 import interfaces.Report;
 import interfaces.WaitingPerson;
-import places.Place;
+import places.*;
 
 import java.util.Objects;
-import java.util.logging.Logger;
+import java.util.logging.*;
 
 import static enums.Mood.*;
 
@@ -26,10 +26,9 @@ public class Person implements WaitingPerson, Report {
     private double waitingTime;
     private int attention;
     private double independence;
-    private static final Logger logger = Logger.getLogger(Person.class.getName());
 
     public Person(Place place) {
-        this.place = place;
+        setPlace(place);
         this.health = 100;
         this.mood = Mood.HAPPY;
         this.forgivingAbility = false;
@@ -43,7 +42,7 @@ public class Person implements WaitingPerson, Report {
 
     public Person(String name, Place place) {
         this.name = name;
-        this.place = place;
+        setPlace(place);
         this.health = 100;
         this.mood = Mood.HAPPY;
         this.forgivingAbility = false;
@@ -88,7 +87,24 @@ public class Person implements WaitingPerson, Report {
     }
 
     public void setPlace(Place place) {
+        // Удаляем из предыдущего места, если есть
+        if (this.place != null) {
+            if (place instanceof Cabinet) {
+                ((Cabinet) place).deletePeople(this);
+            } else if (place instanceof Lab) {
+                ((Lab) place).deletePeople(this);
+            }
+        }
+
+        // Устанавливаем новое место
         this.place = place;
+
+        // Добавляем человека в новое место
+        if (place instanceof Cabinet) {
+            ((Cabinet) place).setPeople(this);
+        } else if (place instanceof Lab) {
+            ((Lab) place).setPeople(this);
+        }
     }
 
     public Place getPlace() {
@@ -143,6 +159,32 @@ public class Person implements WaitingPerson, Report {
         setMood(mood);
     }
 
+    private final static Logger logger = Logger.getLogger(Person.class.getName());
+
+    static {
+        // Удаляем все обработчики по умолчанию
+        Logger rootLogger = Logger.getLogger("");
+        for (Handler handler : rootLogger.getHandlers()) {
+            rootLogger.removeHandler(handler);
+        }
+
+        // Создаем новый обработчик консоли
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setLevel(Level.ALL);
+
+        // Устанавливаем собственный формат
+        consoleHandler.setFormatter(new Formatter() {
+            @Override
+            public String format(LogRecord record) {
+                return record.getMessage() + System.lineSeparator();
+            }
+        });
+
+        // Добавляем обработчик к логгеру
+        logger.addHandler(consoleHandler);
+        logger.setUseParentHandlers(false);
+    }
+
     public void walk() {
         setHealth(getHealth() - 1);
         if (equals(this)) {
@@ -179,7 +221,7 @@ public class Person implements WaitingPerson, Report {
     public void take(Animal mouse) {
         setAttention();
         setMood(Mood.FRIENDLY);
-        logger.info("Хочет забрать " + mouse.getName());
+        logger.info(this.toString() + " xочет забрать " + mouse.getName());
     }
 
     public void letItGo(Animal animal, Place place) {
@@ -222,10 +264,6 @@ public class Person implements WaitingPerson, Report {
 
     @Override
     public String toString() {
-        return this.getClass() +
-                "[name='" + name + '\'' +
-                ", place=" + place +
-                ", mood=" + mood +
-                ']';
+        return name + " (Здоровье: " + health + ", Настроение: " + mood + ", Уровень в науке: " + scienceLevel + ", Опыт в науке: " + scienceExperience + ")";
     }
 }

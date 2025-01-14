@@ -1,15 +1,40 @@
 package places;
 
 import animals.Animal;
+import animals.Mouse;
 import people.Person;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
+import java.util.logging.*;
 
 public class Labyrinth extends Place {
     private int level;
 
-    private static final Logger logger = Logger.getLogger(Labyrinth.class.getName());
+    private final static Logger logger = Logger.getLogger(Labyrinth.class.getName());
+
+    static {
+        // Удаляем все обработчики по умолчанию
+        Logger rootLogger = Logger.getLogger("");
+        for (Handler handler : rootLogger.getHandlers()) {
+            rootLogger.removeHandler(handler);
+        }
+
+        // Создаем новый обработчик консоли
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setLevel(Level.ALL);
+
+        // Устанавливаем собственный формат
+        consoleHandler.setFormatter(new Formatter() {
+            @Override
+            public String format(LogRecord record) {
+                return record.getMessage() + System.lineSeparator();
+            }
+        });
+
+        // Добавляем обработчик к логгеру
+        logger.addHandler(consoleHandler);
+        logger.setUseParentHandlers(false);
+    }
 
     public Labyrinth(int level) {
         super("Лабиринт");

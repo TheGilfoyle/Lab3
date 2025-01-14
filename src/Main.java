@@ -81,7 +81,7 @@ public class Main {
         nemur.walk();
         bart.walk();
         Lab lab = new Lab();
-        lab.deletePeople(charly, bart, nemur);
+        cabinet.deletePeople(charly, bart, nemur);
         lab.getPeople();
         cabinet.setPeople(charly, nemur, bart);
         Labyrinth labyrinth = new Labyrinth( 100);
