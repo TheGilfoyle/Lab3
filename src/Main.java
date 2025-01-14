@@ -39,6 +39,7 @@ public class Main {
         randomPerson1.setWaitingTime(5);
         randomPerson2.setWaitingTime(5);
         Person charly = new Person("Чарли", cabinet);
+        cabinet.getPeople();
         charly.getPlace();
         charly.walk();
         charly.notice();
@@ -82,8 +83,8 @@ public class Main {
         bart.walk();
         Lab lab = new Lab();
         cabinet.deletePeople(charly, bart, nemur);
+        lab.setPeople(charly, bart, nemur);
         lab.getPeople();
-        cabinet.setPeople(charly, nemur, bart);
         Labyrinth labyrinth = new Labyrinth( 100);
         mouse.setPlace(labyrinth);
         bart.letItGo(mouse, labyrinth);

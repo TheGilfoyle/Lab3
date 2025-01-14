@@ -22,10 +22,11 @@ public abstract class Place {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Place)) return false;
         Place place = (Place) o;
         return Objects.equals(name, place.name);
     }
+
 
     @Override
     public int hashCode() {
@@ -35,7 +36,7 @@ public abstract class Place {
     @Override
     public String
     toString() {
-        return this.getClass().getName() +
+        return
                 "[name='" + name + '\'' +
                 ']';
     }

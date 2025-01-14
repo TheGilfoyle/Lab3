@@ -13,17 +13,14 @@ public class Labyrinth extends Place {
     private final static Logger logger = Logger.getLogger(Labyrinth.class.getName());
 
     static {
-        // Удаляем все обработчики по умолчанию
         Logger rootLogger = Logger.getLogger("");
         for (Handler handler : rootLogger.getHandlers()) {
             rootLogger.removeHandler(handler);
         }
 
-        // Создаем новый обработчик консоли
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setLevel(Level.ALL);
 
-        // Устанавливаем собственный формат
         consoleHandler.setFormatter(new Formatter() {
             @Override
             public String format(LogRecord record) {
@@ -31,7 +28,6 @@ public class Labyrinth extends Place {
             }
         });
 
-        // Добавляем обработчик к логгеру
         logger.addHandler(consoleHandler);
         logger.setUseParentHandlers(false);
     }

@@ -22,7 +22,7 @@ public class ScientificWork {
     }
 
     public void isItMine(Person person) {
-        person.setScienceLevel();
+        person.setScienceLevel(person.getScienceLevel() + 1);
     }
 
     public void setSuccess(boolean enoughTime) {

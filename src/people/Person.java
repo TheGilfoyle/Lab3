@@ -74,7 +74,7 @@ public class Person implements WaitingPerson, Report {
         return scienceLevel;
     }
 
-    public void setScienceLevel() {
+    public void setScienceLevel(int scienceLevel) {
         this.scienceLevel = scienceLevel + 1;
     }
 
@@ -87,27 +87,27 @@ public class Person implements WaitingPerson, Report {
     }
 
     public void setPlace(Place place) {
-        // Удаляем из предыдущего места, если есть
         if (this.place != null) {
             if (place instanceof Cabinet) {
-                ((Cabinet) place).deletePeople(this);
-            } else if (place instanceof Lab) {
                 ((Lab) place).deletePeople(this);
+                ((Cabinet) place).setPeople(this);
+            } else if (place instanceof Lab) {
+                ((Cabinet) place).deletePeople(this);
+                ((Lab) place).setPeople(this);
             }
         }
-
-        // Устанавливаем новое место
-        this.place = place;
-
-        // Добавляем человека в новое место
-        if (place instanceof Cabinet) {
-            ((Cabinet) place).setPeople(this);
-        } else if (place instanceof Lab) {
+        else{
+            if (place instanceof Cabinet) {
+                ((Cabinet) place).setPeople(this);
+            } else if (place instanceof Lab) {
             ((Lab) place).setPeople(this);
+            }
         }
+        this.place = place;
     }
 
     public Place getPlace() {
+        logger.info(this.name + " "+ place.toString());
         return place;
     }
 
@@ -162,17 +162,14 @@ public class Person implements WaitingPerson, Report {
     private final static Logger logger = Logger.getLogger(Person.class.getName());
 
     static {
-        // Удаляем все обработчики по умолчанию
         Logger rootLogger = Logger.getLogger("");
         for (Handler handler : rootLogger.getHandlers()) {
             rootLogger.removeHandler(handler);
         }
 
-        // Создаем новый обработчик консоли
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setLevel(Level.ALL);
 
-        // Устанавливаем собственный формат
         consoleHandler.setFormatter(new Formatter() {
             @Override
             public String format(LogRecord record) {
@@ -180,7 +177,6 @@ public class Person implements WaitingPerson, Report {
             }
         });
 
-        // Добавляем обработчик к логгеру
         logger.addHandler(consoleHandler);
         logger.setUseParentHandlers(false);
     }
@@ -188,15 +184,12 @@ public class Person implements WaitingPerson, Report {
     public void walk() {
         setHealth(getHealth() - 1);
         if (equals(this)) {
-            try {
-                double random = Math.random();
-                if (random > 0.76) {
-                    throw new FallException(random);
-                }
-            } catch (FallException fallException) {
-                logger.warning(fallException.getMessage());
+            double random = Math.random();
+            if (random > 0.76) {
+                logger.warning(new FallException(random).getMessage());
             }
         }
+
     }
 
     @Override

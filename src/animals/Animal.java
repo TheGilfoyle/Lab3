@@ -14,7 +14,6 @@ public abstract class Animal {
         this.name = name;
         this.place = place;
     }
-    public Animal() {}
     public String getName() {
         return name;
     }

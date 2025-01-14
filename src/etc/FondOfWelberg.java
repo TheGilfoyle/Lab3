@@ -5,7 +5,7 @@ import people.Person;
 
 public class FondOfWelberg {
     public void getAnAppealFrom(Person person) {
-        person.setScienceLevel();
+        person.setScienceLevel(person.getScienceLevel() + 1);
     }
 
     public class  BoardOfDirectors {
