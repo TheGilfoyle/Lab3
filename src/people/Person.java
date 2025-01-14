@@ -10,29 +10,49 @@ import interfaces.WaitingPerson;
 import places.Place;
 
 import java.util.Objects;
+import java.util.logging.Logger;
 
 import static enums.Mood.*;
 
 public class Person implements WaitingPerson, Report {
     private String name;
     private Place place;
-    private int health = 100;
-    private Mood mood = Mood.HAPPY;
-    private boolean forgivingAbility = false;
-    private int scienceLevel = 0;
-    private int scienceExperience = 0;
-    private int scienceSuccess = 0;
-    private double waitingTime = 0;
-    private int attention = 0;
-    private double independence = 1;
+    private int health;
+    private Mood mood;
+    private boolean forgivingAbility;
+    private int scienceLevel;
+    private int scienceExperience;
+    private int scienceSuccess;
+    private double waitingTime;
+    private int attention;
+    private double independence;
+    private static final Logger logger = Logger.getLogger(Person.class.getName());
 
     public Person(Place place) {
         this.place = place;
+        this.health = 100;
+        this.mood = Mood.HAPPY;
+        this.forgivingAbility = false;
+        this.scienceLevel = 0;
+        this.scienceExperience = 0;
+        this.scienceSuccess = 0;
+        this.waitingTime = 0;
+        this.attention = 0;
+        this.independence = 1;
     }
 
     public Person(String name, Place place) {
         this.name = name;
         this.place = place;
+        this.health = 100;
+        this.mood = Mood.HAPPY;
+        this.forgivingAbility = false;
+        this.scienceLevel = 0;
+        this.scienceExperience = 0;
+        this.scienceSuccess = 0;
+        this.waitingTime = 0;
+        this.attention = 0;
+        this.independence = 1;
     }
 
     public void setHealth(int health) {
@@ -119,7 +139,6 @@ public class Person implements WaitingPerson, Report {
         return waitingTime;
     }
 
-    // Основные методы
     public void pretend(Mood mood) {
         setMood(mood);
     }
@@ -133,7 +152,7 @@ public class Person implements WaitingPerson, Report {
                     throw new FallException(random);
                 }
             } catch (FallException fallException) {
-                System.out.println(fallException.getMessage());
+                logger.warning(fallException.getMessage());
             }
         }
     }
@@ -159,7 +178,8 @@ public class Person implements WaitingPerson, Report {
 
     public void take(Animal mouse) {
         setAttention();
-        System.out.println("Хочет забрать " + mouse.getName());
+        setMood(Mood.FRIENDLY);
+        logger.info("Хочет забрать " + mouse.getName());
     }
 
     public void letItGo(Animal animal, Place place) {

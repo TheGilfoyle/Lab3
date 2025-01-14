@@ -3,30 +3,38 @@ package places;
 import people.Person;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class Cabinet extends Place {
-    public Cabinet(String name) {
-        super.setName(name);
+
+    private static final Logger logger = Logger.getLogger(Cabinet.class.getName());
+
+    public Cabinet() {
+        super("кабинет");
     }
 
     ArrayList<Person> people = new ArrayList<>();
 
     public void setPeople(Person... person) {
         for (Person p : person) {
-            p.setPlace(this);
+            people.add(p);
         }
     }
 
     public void getPeople() {
         for (Person p : people) {
-            System.out.println(p.getName() + " is in a " + this.getName());
+            logger.info(p.getName() + " is in a " + this.getName());
         }
     }
 
     public void deletePeople(Person... person) {
         for (Person p : person) {
-            people.remove(p);
-            System.out.println(p.getName() + " is not in a " + this.getName());
+            if (people.remove(p)) {
+                logger.info(p.getName() + " is not in a " + this.getName());
+            }
+            else {
+                logger.warning("Failed to remove " + p.getName() + " from " + this.getName());
+            }
         }
     }
 }

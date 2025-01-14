@@ -8,7 +8,7 @@ public class FondOfWelberg {
         person.setScienceLevel();
     }
 
-    public static class  BoardOfDirectors {
+    public class  BoardOfDirectors {
         private ResultsOfBoardOfDirectors result;
 
         public void setResult(ResultsOfBoardOfDirectors result) {

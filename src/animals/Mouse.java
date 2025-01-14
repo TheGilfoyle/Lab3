@@ -2,6 +2,8 @@ package animals;
 
 import places.Place;
 
+import java.util.logging.Logger;
+
 public class Mouse extends Animal {
     private String name;
     public Mouse(String name, Place place) {
@@ -10,9 +12,10 @@ public class Mouse extends Animal {
     public Mouse() {
         super();
     }
-    @Override
+    private static final Logger logger = Logger.getLogger(Animal.class.getName());
+
     void makeSound() {
-        System.out.println("Пи-пи-пи!");
+        logger.info("Пи-пи-пи!");
     }
 
     @Override

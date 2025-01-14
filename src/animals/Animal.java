@@ -39,7 +39,7 @@ public abstract class Animal {
         this.scared = scared;
     }
     public void scare(){
-        scared++;
+        setScared(getScared()+2);
     }
     public int getScared() {
         return scared;
@@ -51,9 +51,5 @@ public abstract class Animal {
 
     public int getHealth() {
         return health;
-    }
-    public void isAlive(Animal animal) {
-        if (animal.getScared()>=50) animal.setHealth(0);
-        System.out.println("Животное умерло");
     }
 }

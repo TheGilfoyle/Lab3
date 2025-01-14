@@ -4,15 +4,18 @@ import animals.Animal;
 import people.Person;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class Labyrinth extends Place {
     private int level;
-    private String name;
+
+    private static final Logger logger = Logger.getLogger(Labyrinth.class.getName());
+
     public Labyrinth(int level) {
         super("Лабиринт");
         this.level = level;
     }
-    double timePath(){
+    public double timePath(){
         if (level > 6){
             return level*6 +9;
         }
@@ -25,20 +28,23 @@ public class Labyrinth extends Place {
 
     public void setAnimals(Animal... animal) {
         for (Animal a : animal) {
-            a.setPlace(this);
+            animals.add(a);
         }
     }
 
     public void getAnimals() {
         for (Animal a : animals) {
-            System.out.println(a.getName() + " is in a " + this.getName());
+            logger.info(a.getName() + " is in a " + this.getName());
         }
     }
 
     public void deleteAnimals(Animal... animal) {
         for (Animal a : animal) {
-            animals.remove(a);
-            System.out.println("is not in a" + this.getName());
+            if (animals.remove(a)) {
+                logger.info(a.getName() + " is not in a " + this.getName());
+            } else {
+                logger.warning("Failed to remove " + a.getName() + " from " + this.getName());
+            }
         }
     }
 }

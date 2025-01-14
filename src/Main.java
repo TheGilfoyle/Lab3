@@ -22,7 +22,7 @@ public class Main {
         Cage cage = new Cage("клетка");
         Animal mouse = new Mouse("Элджернон", cage);
         mouse.getPlace();
-        Cabinet cabinet = new Cabinet("кабинет");
+        Cabinet cabinet = new Cabinet();
         Person nemur = new Person("Немур", cabinet);
         Person strauss = new Person("Штраус", cabinet);
         Person bart = new Person("Барт", cabinet);
@@ -66,7 +66,7 @@ public class Main {
         scientificWork.setTime(3);
         scientificWork.enoughTime();
         scientificWork.setTime(15);
-        FondOfWelberg.BoardOfDirectors boardOfDirectors = new FondOfWelberg.BoardOfDirectors();
+        FondOfWelberg.BoardOfDirectors boardOfDirectors =  fondOfWelberg.new BoardOfDirectors();
         boardOfDirectors.setResult(ResultsOfBoardOfDirectors.APPROVED);
         boardOfDirectors.getResult();
         nemur.handshake(nemur,charly);
@@ -81,8 +81,8 @@ public class Main {
         nemur.walk();
         bart.walk();
         Lab lab = new Lab();
-        cabinet.deletePeople(charly, bart, nemur);
-        cabinet.getPeople();
+        lab.deletePeople(charly, bart, nemur);
+        lab.getPeople();
         cabinet.setPeople(charly, nemur, bart);
         Labyrinth labyrinth = new Labyrinth( 100);
         mouse.setPlace(labyrinth);
