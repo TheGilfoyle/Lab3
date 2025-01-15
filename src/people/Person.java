@@ -5,6 +5,7 @@ import enums.Mood;
 import enums.ResultsOfBoardOfDirectors;
 import etc.ScientificWork;
 import exceptions.FallException;
+import exceptions.PersonIsAlreadyInPlace;
 import interfaces.Report;
 import interfaces.WaitingPerson;
 import places.*;
@@ -87,21 +88,11 @@ public class Person implements WaitingPerson, Report {
     }
 
     public void setPlace(Place place) {
-        if (this.place != null) {
-            if (place instanceof Cabinet) {
-                ((Lab) place).deletePeople(this);
-                ((Cabinet) place).setPeople(this);
-            } else if (place instanceof Lab) {
-                ((Cabinet) place).deletePeople(this);
-                ((Lab) place).setPeople(this);
-            }
+        if (this.place == place) {
+            throw new PersonIsAlreadyInPlace(this.getName() + " is already in " + place.getName());
         }
-        else{
-            if (place instanceof Cabinet) {
-                ((Cabinet) place).setPeople(this);
-            } else if (place instanceof Lab) {
-            ((Lab) place).setPeople(this);
-            }
+        if (place instanceof Cabinet) {
+            ((Cabinet) place).addPersonToCabinet(this);
         }
         this.place = place;
     }
@@ -183,14 +174,15 @@ public class Person implements WaitingPerson, Report {
 
     public void walk() {
         setHealth(getHealth() - 1);
-        if (equals(this)) {
+        int charlyHashCode = Objects.hash("Чарли");
+        if (this.hashCode() == charlyHashCode) {
             double random = Math.random();
             if (random > 0.76) {
                 logger.warning(new FallException(random).getMessage());
             }
         }
-
     }
+
 
     @Override
     public void reportTo(ScientificWork scientificWork) {
@@ -244,15 +236,12 @@ public class Person implements WaitingPerson, Report {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return Objects.equals(name, "Чарли");
+        return Objects.equals(name, ((Person) o).name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, place, mood);
+        return Objects.hash("Чарли");
     }
 
     @Override

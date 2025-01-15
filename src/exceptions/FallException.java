@@ -10,6 +10,6 @@ public class FallException extends Exception {
 
     @Override
     public String getMessage() {
-        return "FallException: " + random + " человек упал";
+        return String.format("FallException: %.3f человек упал", random);
     }
 }

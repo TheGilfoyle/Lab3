@@ -36,13 +36,16 @@ public class Cabinet extends Place {
 
     ArrayList<Person> people = new ArrayList<>();
 
-    public void setPeople(Person... person) {
-        for (Person p : person) {
-            if (people.contains(p)) {
-                throw new PersonIsAlreadyInPlace(p.getName() + " is already in " + this.getName());
-            }
-            people.add(p);
+    public void setPeople(Person... persons) {
+        for (Person person : persons) {
+            person.setPlace(this);
+            people.add(person);
         }
+    }
+
+    public void addPersonToCabinet(Person person) {
+            people.add(person);
+            logger.info(person.getName() + " has entered the " + this.getName());
     }
 
     public void getPeople() {
